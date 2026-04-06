@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mango Sciences — Technical Deep-Dive Briefing</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brand:   #515FFC;
+  --green:   #059669;
+  --red:     #DC2626;
+  --amber:   #D97706;
+  --purple:  #7C3AED;
+  --teal:    #0D9488;
+  --text-1:  #111111;
+  --text-2:  #555555;
+  --text-3:  #999999;
+  --border:  #E5E5E5;
+  --bg-alt:  #F7F7F6;
+  --nav-h:   48px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-1);
+  background: #fff;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: 0;
+}
+.nav-logo { display: flex; align-items: center; gap: 7px; margin-right: 28px; flex-shrink: 0; text-decoration: none; }
+.nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+.nav-logo-text { font-size: 13px; font-weight: 700; color: var(--text-1); letter-spacing: -0.01em; }
+.nav-divider { width: 1px; height: 20px; background: var(--border); margin: 0 20px; flex-shrink: 0; }
+.nav-links { display: flex; align-items: center; gap: 0; flex: 1; overflow-x: auto; }
+.nav-link { font-size: 13px; font-weight: 500; color: var(--text-2); text-decoration: none; padding: 0 14px; height: var(--nav-h); display: flex; align-items: center; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.1s, border-color 0.1s; }
+.nav-link:hover { color: var(--text-1); }
+.nav-link.active { color: var(--text-1); border-bottom-color: var(--brand); font-weight: 600; }
+.nav-internal { margin-left: auto; flex-shrink: 0; background: var(--text-1); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 3px; }
+
+/* ── LAYOUT ── */
+.content-wrap { max-width: 900px; margin: 0 auto; padding: 0 40px; }
+.section { padding: 72px 0 80px; border-bottom: 1px solid var(--border); }
+.section.alt { background: var(--bg-alt); }
+.section.dark { background: var(--text-1); color: #fff; }
+
+/* ── TYPOGRAPHY ── */
+.section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; font-family: 'Courier New', monospace; }
+.section.dark .section-eyebrow { color: #6EE7B7; }
+.section-headline { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-1); margin-bottom: 12px; }
+.section.dark .section-headline { color: #fff; }
+.section-sub { font-size: 16px; color: var(--text-2); margin-bottom: 40px; max-width: 640px; }
+.section.dark .section-sub { color: rgba(255,255,255,0.55); }
+
+/* ── HERO ── */
+.hero { padding: 56px 0 64px; border-bottom: 1px solid var(--border); }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); font-family: 'Courier New', monospace; margin-bottom: 20px; }
+.hero-headline { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; color: var(--text-1); margin-bottom: 14px; }
+.hero-sub { font-size: 18px; color: var(--text-2); max-width: 560px; }
+
+/* ── INFO CARDS ── */
+.info-card { border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; margin-bottom: 12px; background: #fff; }
+.info-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); font-family: 'Courier New', monospace; margin-bottom: 12px; }
+.info-card-label.red { color: var(--red); }
+.info-card-label.amber { color: var(--amber); }
+.info-card-label.brand { color: var(--brand); }
+.info-card-label.green { color: var(--green); }
+.info-card p { font-size: 15px; color: var(--text-1); margin-bottom: 10px; }
+.info-card p:last-child { margin-bottom: 0; }
+.info-card p em { font-style: italic; color: var(--green); }
+
+/* ── HOOK / WATCH-OUT BLOCKS ── */
+.hook-block { border: 1px solid var(--border); border-radius: 6px; padding: 18px 22px; margin-bottom: 8px; font-size: 14px; line-height: 1.65; background: #fff; }
+.hook-block .hook-label { font-weight: 800; color: var(--text-1); }
+.hook-block.warn { border-left: 3px solid var(--amber); }
+.hook-block.warn .hook-label { color: var(--amber); }
+.hook-block.danger { border-left: 3px solid var(--red); }
+.hook-block.danger .hook-label { color: var(--red); }
+.hook-block.good { border-left: 3px solid var(--green); }
+.hook-block.good .hook-label { color: var(--green); }
+.hook-block.info { border-left: 3px solid var(--brand); }
+.hook-block.info .hook-label { color: var(--brand); }
+
+/* ── ACCORDION ── */
+.accordion { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; overflow: hidden; }
+.accordion-trigger { display: flex; align-items: center; gap: 12px; padding: 14px 20px; cursor: pointer; background: #fff; border: none; width: 100%; text-align: left; font-size: 14px; font-weight: 600; color: var(--text-1); transition: background 0.1s; }
+.accordion-trigger:hover { background: var(--bg-alt); }
+.accordion-arrow { font-size: 10px; color: var(--text-3); transition: transform 0.15s; flex-shrink: 0; }
+.accordion-arrow.open { transform: rotate(90deg); }
+.acc-type { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; flex-shrink: 0; font-family: 'Courier New', monospace; }
+.acc-type.ask      { background: #ECFDF5; color: var(--green); }
+.acc-type.show     { background: #EEF2FF; color: var(--brand); }
+.acc-type.deep     { background: #F5F3FF; color: var(--purple); }
+.acc-type.critical { background: #FEF2F2; color: var(--red); }
+.acc-type.docs     { background: #F3F4F6; color: #374151; }
+.acc-type.eng      { background: #EEF2FF; color: var(--brand); }
+.acc-type.com      { background: #FFFBEB; color: var(--amber); }
+.accordion-body { padding: 20px 24px; border-top: 1px solid var(--border); background: #fff; display: none; font-size: 14px; color: var(--text-2); line-height: 1.7; }
+.accordion-body.open { display: block; }
+.accordion-body p { margin-bottom: 10px; }
+.accordion-body p:last-child { margin-bottom: 0; }
+.accordion-body strong { color: var(--text-1); font-weight: 600; }
+
+/* ── PEOPLE GRID ── */
+.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.person-card { border: 1px solid var(--border); border-radius: 6px; padding: 20px; background: #fff; }
+.person-name { font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 3px; }
+.person-role { font-size: 12px; color: var(--teal); margin-bottom: 12px; font-weight: 500; }
+.person-role.red { color: var(--red); }
+.person-role.amber { color: var(--amber); }
+.person-role.brand { color: var(--brand); }
+.person-body { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+/* ── STAT STRIP ── */
+.stat-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.stat-cell { padding: 20px 18px; border-right: 1px solid var(--border); text-align: center; }
+.stat-cell:last-child { border-right: none; }
+.stat-num { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: var(--text-1); font-family: 'Courier New', monospace; margin-bottom: 4px; }
+.stat-num.green { color: var(--green); }
+.stat-num.amber { color: var(--amber); }
+.stat-num.brand { color: var(--brand); }
+.stat-lbl { font-size: 11px; color: var(--text-2); font-weight: 500; }
+
+/* ── OPPORTUNITY CARDS ── */
+.opp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+.opp-card { border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; background: #fff; }
+.opp-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); font-family: 'Courier New', monospace; margin-bottom: 8px; }
+.opp-card-title { font-size: 16px; font-weight: 700; color: var(--text-1); margin-bottom: 8px; }
+.opp-card-body { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+.opp-card-body strong { color: var(--text-1); }
+
+/* ── BLOCKQUOTE ── */
+blockquote { border-left: 3px solid var(--brand); padding: 12px 20px; margin: 16px 0; background: #FAFAFA; font-size: 14px; color: var(--text-2); font-style: italic; border-radius: 0 6px 6px 0; }
+blockquote cite { display: block; margin-top: 8px; font-size: 12px; font-style: normal; color: var(--text-3); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .hero-headline { font-size: 36px; }
+  .section-headline { font-size: 32px; }
+  .people-grid { grid-template-columns: 1fr; }
+  .opp-grid { grid-template-columns: 1fr; }
+  .stat-strip { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-dot"></span>
+    <span class="nav-logo-text">Conquer AI</span>
+  </a>
+  <span class="nav-divider"></span>
+  <div class="nav-links">
+    <a class="nav-link" href="#intro">The Intro</a>
+    <a class="nav-link" href="#org">Mango Context</a>
+    <a class="nav-link" href="#contacts">Key Contacts</a>
+    <a class="nav-link" href="#opportunities">Opportunity Areas</a>
+    <a class="nav-link" href="#approach">Our Approach</a>
+    <a class="nav-link" href="#risks">Risks & Watch Points</a>
+  </div>
+  <span class="nav-internal">Internal</span>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="content-wrap">
+    <div class="hero-eyebrow">Mango Sciences · Technical Deep-Dive Briefing</div>
+    <h1 class="hero-headline">2.7 million cancer patients.<br>A data platform ready<br>for agents.</h1>
+    <p class="hero-sub">Second meeting following advisor introduction via Muna Bhanji. Mango's technical leadership will present their product roadmap and agentic AI use cases — our job is to listen, probe, and identify where we can deliver the most value fastest.</p>
+  </div>
+</div>
+
+<!-- ══ SECTION: THE INTRO ══ -->
+<div id="intro" class="section">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">The Introduction</div>
+  <h2 class="section-headline">Muna Bhanji<br>opened this door.</h2>
+  <p class="section-sub">Muna is an advisor to both Mango and Conquer. She identified alignment between Mango's acceleration needs and our agentic AI capabilities. This is the technical follow-up to the March 16th discovery call.</p>
+
+  <div class="stat-strip">
+    <div class="stat-cell">
+      <div class="stat-num brand">Mango</div>
+      <div class="stat-lbl">Sciences</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">2.7M</div>
+      <div class="stat-lbl">Patient records</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">Boston</div>
+      <div class="stat-lbl">US HQ</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num green">India</div>
+      <div class="stat-lbl">Primary data market</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num amber">6 mo</div>
+      <div class="stat-lbl">CTO tenure</div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-label">Meeting objective</div>
+    <p>Mango's technical team (Hanif, Gavin) will walk through their product roadmap and share where they see agentic AI fitting in. Our job is to understand their data landscape, validate which use cases are viable, and identify a first engagement — likely a whiteboard or alignment doc as the next step.</p>
+  </div>
+
+  <div class="hook-block good">
+    <span class="hook-label">Strategic hook — They've already tried and failed: </span>Mango attempted agentic pipelines on messy data and it didn't work. They know what doesn't work. This means they'll be receptive to our structured approach (whiteboard → alignment → at-risk delivery) rather than wanting us to just "build something."
+  </div>
+
+  <div class="hook-block info">
+    <span class="hook-label">What happened since March 16th: </span>NDA was supposed to be sent by March 20th. Two outstanding actions remain pending in our system: NDA execution and scheduling this technical deep-dive. The fact that today's call is happening with the full senior team suggests momentum is real, regardless of whether the NDA paperwork is fully executed.
+  </div>
+
+</div>
+</div>
+
+<!-- ══ SECTION: MANGO CONTEXT ══ -->
+<div id="org" class="section alt">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">Organisation Context</div>
+  <h2 class="section-headline">A cancer data platform<br>with massive ambitions.</h2>
+  <p class="section-sub">Mango Sciences sits at the intersection of oncology data, value-based drug financing, and clinical trials. They're not a typical health-tech startup — they have real data, real revenue mechanisms, and a clear need for agentic AI.</p>
+
+  <div class="info-card">
+    <div class="info-card-label">What Mango Sciences actually does</div>
+    <p><strong>Cancer data platform</strong> with ~2.7 million lines of phenotypic clinical data, primarily acquired from India. They operate across two core use cases: (1) a <strong>value-based financing mechanism for cancer drugs</strong> where patients get a money-back guarantee based on health outcomes, and (2) <strong>clinical trials</strong> via an invested CRO partner, with their first two trials coming up.</p>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-label red">The data challenge — this is their obsession</div>
+    <p><strong>Data harmonisation is the central technical problem.</strong> Almost 3 million patients worth of extremely messy EHR records — even the structured data is messy. They're currently using ontology-based NLP approaches (inspired by Palantir's ontology-first philosophy) and are "wading into GenAI" cautiously.</p>
+    <p>They're about to go multimodal: genomics and radiology/pathology data are coming. The harmonisation challenge is only going to get harder.</p>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-label green">Agentic readiness — their own framing</div>
+    <p>Hanif's team is focused on getting their data platform into <strong>"agentic readiness"</strong> — their term, not ours. They understand that letting loose agents on messy data doesn't work (they've tried). This is a sophisticated buyer who knows what they need but hasn't cracked the execution.</p>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-label brand">The flywheel ambition</div>
+    <p>Mohit's strategic goal is not building any single application — it's building <strong>the capability to rapidly create applications</strong>. He wants a platform approach to agentic AI. In his words: "The ability to build applications is more the goal than building an application in particular." This is exactly how we think about it.</p>
+  </div>
+
+  <div class="hook-block warn">
+    <span class="hook-label">Watch out — Distributed team: </span>Mango's team is spread across Dubai, India, US West Coast, and US East Coast. Decision-making and technical collaboration will need to account for timezone complexity and distributed ownership.
+  </div>
+
+</div>
+</div>
+
+<!-- ══ SECTION: KEY CONTACTS ══ -->
+<div id="contacts" class="section">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">Key Contacts</div>
+  <h2 class="section-headline">Five people in the room.<br>Know who does what.</h2>
+  <p class="section-sub">Mohit runs the show. Hanif and Gavin are the technical decision-makers who'll present today. Andy drives commercial. Chitrang runs ops. All five were at the first call.</p>
+
+  <div class="people-grid" style="margin-bottom:16px;">
+    <div class="person-card">
+      <div class="person-name">Mohit</div>
+      <div class="person-role">Co-Founder & CEO</div>
+      <div class="person-body">MD background, ex-consulting, ex-startup, ex-investor. Thinks in terms of <strong>tech, data, ops, and commercial working together</strong> — that's why the whole senior team is on this call. He's the strategic decision-maker and sets the vision. Left early last call but set the tone: wants a meaningful conversation, not a vendor demo.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Hanif Khalak</div>
+      <div class="person-role brand">CTO · ~6 months in</div>
+      <div class="person-body"><strong>Primary technical counterpart.</strong> Owns the data platform, engineering, and the agentic readiness roadmap. Relatively new (6 months) but clearly has a strong handle on the technical landscape. Speaks with precision about data harmonisation, NLP approaches, and where GenAI fits. He'll lead today's roadmap walkthrough. Has already identified areas for agentic AI.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Gavin Miyasato</div>
+      <div class="person-role brand">Chief Data Scientist · Boston</div>
+      <div class="person-body">Done significant work on <strong>patient similarity analysis</strong> using traditional models — directly relevant to outcome-based and cohort-building use cases. Self-described as early in his personal AI journey (his first Claude experience was writing a duplicate-file script over a weekend). Asks sharp questions — he's the one who probed our delivery model (staff aug vs. ownership).</div>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Andy Liu</div>
+      <div class="person-role">Head of Commercial</div>
+      <div class="person-body">Commercially minded, asks the right questions. In the first call he asked <strong>"where are agents most effective?"</strong> — a sign he's thinking about ROI and practical application, not just technical curiosity. He took ownership of the NDA action. Also asked about internal vs. external-facing agent use cases.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Chitrang Shah</div>
+      <div class="person-role">Head of Operations</div>
+      <div class="person-body">Runs ops. Was on the first call but didn't speak much. His presence signals that <strong>operational integration matters to Mohit</strong> — any agentic solution needs to work within ops reality, not just in a technical sandbox.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Muna Bhanji</div>
+      <div class="person-role amber">Conquer Advisor · Made the Introduction</div>
+      <div class="person-body">Advisor to both Mango and Conquer. Deep pharma experience (spent years at Merck). She's <strong>actively advising other biotechs</strong> on similar agentic AI transformation challenges. Made a key strategic point last call: Mango should build AI-native processes from scratch rather than layering agents onto legacy workflows.</div>
+    </div>
+  </div>
+
+  <div class="hook-block good">
+    <span class="hook-label">Strategic hook — Hanif is the key: </span>He's 6 months in as CTO, building his vision. He's the one defining what "agentic readiness" means for Mango. If we can demonstrate that our approach accelerates his roadmap (not replaces it), he becomes our champion. Speak his language: ontologies, data harmonisation, annotation pipelines, platform thinking.
+  </div>
+
+  <div class="hook-block info">
+    <span class="hook-label">Gavin is the quiet validator: </span>Similar to the Sami dynamic at AARP. Gavin has the deepest domain knowledge (patient similarity, cancer data modelling). If Hanif is the buy decision, Gavin validates whether it will actually work on their data. Make sure he feels like a partner in evaluating this, not a bystander.
+  </div>
+
+</div>
+</div>
+
+<!-- ══ SECTION: OPPORTUNITY AREAS ══ -->
+<div id="opportunities" class="section alt">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">Opportunity Areas</div>
+  <h2 class="section-headline">Four surfaces<br>for agentic AI.</h2>
+  <p class="section-sub">Based on the March 16th discovery call, these are the areas where agentic AI could deliver the most value. Today's roadmap presentation should validate, refine, or reorder these.</p>
+
+  <div class="opp-grid">
+    <div class="opp-card">
+      <div class="opp-card-num">Opportunity 01 — Likely Entry Point</div>
+      <div class="opp-card-title">Data Harmonisation & Agentic Readiness</div>
+      <div class="opp-card-body">The central problem: <strong>~3M messy EHR records</strong> that need to be harmonised, with multimodal data (genomics, radiology/pathology) incoming. They're currently using ontology-based NLP and have tried (and failed with) agentic pipelines on raw data. <strong>The opportunity is helping them bridge the gap</strong> between their current ontology approach and agentic readiness — building the data foundation that makes everything else possible. This is their obsession and our most credible entry point.</div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-card-num">Opportunity 02</div>
+      <div class="opp-card-title">Annotation Tooling & Non-Technical Interfaces</div>
+      <div class="opp-card-body">Mango has a <strong>non-technical annotation team</strong> that needs purpose-built interfaces to work with the data. They need annotation tools and a <strong>unified data control plane</strong>. This is a classic agentic AI application: build intelligent tooling that amplifies non-technical users, with agents handling the complex data operations underneath. Contained, measurable, high internal value.</div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-card-num">Opportunity 03</div>
+      <div class="opp-card-title">Patient Similarity & Outcome Modelling</div>
+      <div class="opp-card-body">Gavin has done significant work on <strong>patient similarity analysis using traditional models</strong>. This connects directly to their value-based financing mechanism (money-back guarantee on cancer drugs based on outcomes). The agentic opportunity: <strong>augment traditional modelling with AI-driven cohort building and outcome prediction</strong>. Higher stakes (consequence of non-determinism matters here), but potentially the highest-value use case.</div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-card-num">Opportunity 04</div>
+      <div class="opp-card-title">Clinical Trial Acceleration</div>
+      <div class="opp-card-body">First two clinical trials coming up via their invested CRO partner. <strong>We have direct experience in clinical trials</strong> (Tom referenced an existing client under NDA). The agentic opportunity: patient matching, site selection, protocol optimisation, regulatory document processing. This is a longer-term play but differentiates us — mention our clinical trial experience (within NDA constraints) to build credibility.</div>
+    </div>
+  </div>
+
+  <div class="hook-block good">
+    <span class="hook-label">Sequencing logic: </span>Opp 01 (data harmonisation) is the foundation everything else depends on. It's also where they're spending the most effort and have the most pain. Lead here, use it to prove our approach, and let it naturally open Opps 02–04. Each subsequent engagement builds on the data platform we help them establish.
+  </div>
+
+  <div class="hook-block good">
+    <span class="hook-label">The flywheel play: </span>Mohit doesn't want us to build one application — he wants the capability to rapidly create applications. If we position our work as building the agentic platform (Opp 01 + 02), not just solving one problem, we align with his strategic vision and become a long-term partner, not a one-off vendor.
+  </div>
+
+</div>
+</div>
+
+<!-- ══ SECTION: OUR APPROACH ══ -->
+<div id="approach" class="section">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">Our Approach</div>
+  <h2 class="section-headline">Listen first.<br>Then whiteboard.</h2>
+  <p class="section-sub">Today is about understanding, not proposing. Let Hanif and Gavin present. Probe where it matters. Leave with enough context to produce an alignment doc or whiteboard as the next step.</p>
+
+  <div class="info-card">
+    <div class="info-card-label">How this meeting should flow</div>
+    <p><strong>Phase 1 — Mango presents (30 min):</strong> Hanif and Gavin walk through the product roadmap, agentic AI use cases, and lessons from past attempts. Our job: listen, take notes, ask clarifying questions.</p>
+    <p><strong>Phase 2 — We probe (15 min):</strong> For each use case, apply the non-determinism framework. Understand the full process around each opportunity. Push for measurable success criteria.</p>
+    <p><strong>Phase 3 — Next steps (15 min):</strong> Propose the whiteboard as the next step. Offer to produce an alignment doc that reflects our understanding back to them. This is the Conquer way — earn the right to propose by demonstrating understanding first.</p>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAcc(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="acc-type ask">ASK</span>
+      Key questions for the meeting
+    </button>
+    <div class="accordion-body">
+      <p><strong>For each use case they present:</strong></p>
+      <p>— What happens when the AI gets it wrong? What's the consequence of non-determinism here?</p>
+      <p>— What does the end-to-end process look like today? Where does this use case sit within it?</p>
+      <p>— What would success look like in measurable terms? What KPI moves?</p>
+      <p>— Have you tried anything here before? What worked, what didn't, and why?</p>
+      <p style="margin-top:16px;"><strong>For Hanif (data platform):</strong></p>
+      <p>— Walk us through the current data architecture — what sits where, what's harmonised, what's still raw?</p>
+      <p>— When you say "agentic readiness" — what does that state look like to you? What needs to be true about the data before you'd trust an agent with it?</p>
+      <p>— How does the ontology-based NLP pipeline work today? Where does it break down?</p>
+      <p style="margin-top:16px;"><strong>For Gavin (data science):</strong></p>
+      <p>— The patient similarity work — what models are you using, and where do you see the ceiling with the traditional approach?</p>
+      <p>— As multimodal data comes in (genomics, radiology), how does that change your modelling approach?</p>
+      <p>— What does the annotation team's workflow look like? Where do they spend the most time?</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAcc(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="acc-type critical">CRITICAL</span>
+      The non-determinism framework — use this for every use case
+    </button>
+    <div class="accordion-body">
+      <p>Tom's headline framework from the first call, and the single most important lens for evaluating Mango's use cases:</p>
+      <p><strong>"The absolute first question I always ask myself is: what is the consequence of non-determinism?"</strong></p>
+      <p>For a given input, a language model can't guarantee a specific output. So for each use case:</p>
+      <p>1. <strong>What happens if the AI is wrong?</strong> Is it a minor inconvenience or a patient safety issue?</p>
+      <p>2. <strong>If we need human-in-the-loop, does that delete the value?</strong> If HITL reduces the ROI to near-zero, it might not be the right starting point.</p>
+      <p>3. <strong>Can we scope the use case so the consequence of error is contained?</strong> Data harmonisation errors can be caught and corrected. Clinical outcome predictions that are wrong can have severe consequences.</p>
+      <p>This framework will help us rank their use cases by viability, not just desirability.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAcc(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="acc-type show">SHOW</span>
+      Reference points from the first call
+    </button>
+    <div class="accordion-body">
+      <p><strong>Mohit's exact words on the goal:</strong> "The ability to build applications is more the goal than building an application in particular — how do we get the flywheel started rather than just build the wheels."</p>
+      <p><strong>Hanif on data:</strong> "It's a hell of a job, this data thing. Almost 3 million patients, billions of very messy EHR records. We're going to be multimodal pretty soon — genomics and radiology/pathology."</p>
+      <p><strong>Muna's strategic point:</strong> "You are relatively early in your journey, and this might be exactly the right time to build from scratch rather than layering onto legacy processes." — This reinforces our platform approach.</p>
+      <p><strong>What they've tried:</strong> "We already tried some and it doesn't work great — let loose a bunch of somewhat well-defined agentic pipelines on top of very messy data." — Probe what specifically went wrong.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAcc(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="acc-type eng">ENG</span>
+      Our clinical trials credibility
+    </button>
+    <div class="accordion-body">
+      <p>Tom mentioned in the first call that we have <strong>existing clinical trial clients under NDA</strong>. We can't name them or describe the work in detail, but we can reference the experience:</p>
+      <p><strong>"We have several clients specifically in the clinical trial space. The NDA we have in place means we can't say their name, let alone what we built — but we can say that the domain is one we understand deeply."</strong></p>
+      <p>This is a credibility signal for Opp 04 (clinical trial acceleration). Use it when they raise their CRO partnership and upcoming trials.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══ SECTION: RISKS & WATCH POINTS ══ -->
+<div id="risks" class="section alt">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">Risks & Watch Points</div>
+  <h2 class="section-headline">Things to keep<br>front of mind.</h2>
+
+  <div class="hook-block warn">
+    <span class="hook-label">Watch out — Data sensitivity in oncology: </span>Cancer patient data is among the most sensitive data categories globally. Any solution we propose must account for regulatory compliance (HIPAA, Indian data protection laws, and potentially GDPR for ex-US markets). Acknowledge this upfront — it builds trust and shows we understand the domain.
+  </div>
+
+  <div class="hook-block warn">
+    <span class="hook-label">Watch out — New CTO, new vision: </span>Hanif is 6 months in. He's building his technical vision and team. Be careful not to position Conquer in a way that feels like we're stepping on his toes or implying his current approach is wrong. Frame our contribution as accelerating his roadmap, not replacing it.
+  </div>
+
+  <div class="hook-block warn">
+    <span class="hook-label">Watch out — NDA still pending: </span>The mutual NDA from the first call hasn't been formally completed (at least not in our system). This may limit what they share today. Don't push for proprietary details they're not comfortable sharing yet — and if the NDA does come up, offer to move quickly on our side.
+  </div>
+
+  <div class="hook-block danger">
+    <span class="hook-label">Don't solutionise too early: </span>Tom was explicit about this in the first call. We don't know enough about their business yet. Today is about understanding. The temptation will be to hear a problem and immediately propose a solution — resist it. The right next step is a whiteboard or alignment doc, not a proposal.
+  </div>
+
+  <div class="hook-block good">
+    <span class="hook-label">Why this is a strategic account: </span>Mango sits at the intersection of healthcare, AI, and clinical trials — three of the highest-value verticals for agentic AI. They have real data (2.7M patients), real revenue mechanisms (value-based financing), and a CEO who thinks in platform terms. If we can help them build the agentic flywheel, this becomes a flagship case study for healthcare AI and opens doors across pharma and biotech. Combined with Muna's network of biotech advisory clients, Mango could be the reference account that unlocks an entire sector.
+  </div>
+
+</div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div style="padding:40px 0; text-align:center; font-size:12px; color:var(--text-3); border-top:1px solid var(--border);">
+  <div class="content-wrap">
+    Conquer AI · Mango Sciences Technical Deep-Dive Briefing · April 2026 · Internal use only
+  </div>
+</div>
+
+<script>
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const arrow = btn.querySelector('.accordion-arrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+// Nav active state on scroll
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
