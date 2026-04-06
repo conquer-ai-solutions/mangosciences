@@ -150,6 +150,27 @@ nav {
 blockquote { border-left: 3px solid var(--brand); padding: 12px 20px; margin: 16px 0; background: #FAFAFA; font-size: 14px; color: var(--text-2); font-style: italic; border-radius: 0 6px 6px 0; }
 blockquote cite { display: block; margin-top: 8px; font-size: 12px; font-style: normal; color: var(--text-3); }
 
+/* ── TECH SCRIPT ── */
+.tech-scenario { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px; overflow: hidden; }
+.tech-trigger { display: flex; align-items: center; gap: 12px; padding: 16px 20px; cursor: pointer; background: #fff; border: none; width: 100%; text-align: left; font-size: 14px; font-weight: 600; color: var(--text-1); transition: background 0.1s; }
+.tech-trigger:hover { background: var(--bg-alt); }
+.tech-num { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; flex-shrink: 0; font-family: 'Courier New', monospace; background: #EEF2FF; color: var(--brand); }
+.tech-body { padding: 24px 28px; border-top: 1px solid var(--border); background: #fff; display: none; font-size: 14px; color: var(--text-2); line-height: 1.75; }
+.tech-body.open { display: block; }
+.tech-body .context-block { background: var(--bg-alt); border-radius: 6px; padding: 16px 20px; margin: 12px 0; font-size: 13px; }
+.tech-body .context-block .ctx-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-family: 'Courier New', monospace; margin-bottom: 8px; }
+.tech-body .say-this { border-left: 3px solid var(--green); padding: 14px 20px; margin: 14px 0; background: #F0FDF4; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--text-1); line-height: 1.7; font-style: italic; }
+.tech-body .say-this .say-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); font-family: 'Courier New', monospace; margin-bottom: 8px; font-style: normal; }
+.tech-body p { margin-bottom: 10px; }
+.tech-body p:last-child { margin-bottom: 0; }
+.tech-body strong { color: var(--text-1); font-weight: 600; }
+.tech-ref-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+.tech-ref-table th { text-align: left; padding: 10px 14px; background: var(--text-1); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.tech-ref-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+.tech-ref-table tr:last-child td { border-bottom: none; }
+.tech-ref-table td:first-child { font-weight: 600; color: var(--text-1); width: 30%; white-space: nowrap; }
+.tech-ref-table td:last-child { color: var(--text-2); font-style: italic; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
   .hero-headline { font-size: 36px; }
@@ -175,6 +196,7 @@ blockquote cite { display: block; margin-top: 8px; font-size: 12px; font-style: 
     <a class="nav-link" href="#contacts">Key Contacts</a>
     <a class="nav-link" href="#opportunities">Opportunity Areas</a>
     <a class="nav-link" href="#approach">Our Approach</a>
+    <a class="nav-link" href="#technical">Technical Script</a>
     <a class="nav-link" href="#risks">Risks & Watch Points</a>
   </div>
   <span class="nav-internal">Internal</span>
@@ -451,6 +473,381 @@ blockquote cite { display: block; margin-top: 8px; font-size: 12px; font-style: 
 </div>
 </div>
 
+<!-- ══ SECTION: TECHNICAL SCRIPT ══ -->
+<div id="technical" class="section dark">
+<div class="content-wrap">
+
+  <div class="section-eyebrow">Technical Navigation Script</div>
+  <h2 class="section-headline">Every hard question.<br>Ready-to-go answers.</h2>
+  <p class="section-sub">13 technical scenarios drawn from 12 real Conquer engagements — Playtech, Lumanity, News UK, Einstein, Suvoda, YBS, Azets and more. Click to expand. Use verbatim or adapt.</p>
+
+</div>
+</div>
+
+<div class="section">
+<div class="content-wrap">
+
+  <!-- SCENARIO 1 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">01</span>
+      "What tech stack do you build in?"
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">Principle — from AB & Einstein</div>
+        <p><strong>Tech agnostic, client-first.</strong> Never lead with a stack. Ask about theirs first, then adapt. The spirit is ownership transfer — whatever we build runs in their cloud, their source code, their IP.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "Before we get into what we'd recommend, can you walk us through what you're currently running on? Cloud provider, primary languages, what your data layer looks like, what models you've experimented with?"
+      </div>
+      <div class="say-this">
+        <div class="say-label">Then follow with</div>
+        "The spirit of how we work is — how do we set your team up to own and operate this in the longer term. Whatever we build will run in your cloud environment, it's your source code, your IP."
+      </div>
+      <p>If they push on what Conquer prefers: <strong>"We tend to reach for Python, we're model-agnostic — we'll use Claude, GPT, open-source models, whatever fits the use case. For data-heavy work like yours, we'd benchmark extraction accuracy for your specific data types early."</strong></p>
+    </div>
+  </div>
+
+  <!-- SCENARIO 2 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">02</span>
+      Data harmonisation architecture
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Azets — structuring unstructured data at scale</div>
+        <p>100K+ SME clients of fragmented data. Staged approach: <strong>auto-validation → pre-flight AI checks → human-in-the-loop → self-service automation.</strong></p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Suvoda — accuracy cascade in healthcare</div>
+        <p>Static/known cases: <strong>99.9%</strong> · Semi-novel: <strong>71.6%</strong> · Truly novel: <strong>41.4%</strong>. Accuracy degrades dramatically as novelty increases. Mango's agentic pipelines failed because they threw agents at the hardest cases first.</p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Lumanity — biopharma data processing</div>
+        <p>Knowledge FRaiME ingested ~50 complex biopharma docs with citation-backed answers. Staged confidence pipeline even in pharma: deterministic rules → AI-assisted → human review.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "That accuracy cascade is something we've seen across multiple healthcare engagements. When you throw agents at truly novel data, accuracy drops off a cliff — we've seen it go from 99% on known patterns to 40% on novel ones. So what we've found works is a tiered approach: start with the data you can validate deterministically, use agents to accelerate the middle tier where you have partial structure, and keep humans on the genuinely novel cases. Over time, as the agent sees more confirmed examples, that middle tier expands and the human-only tier shrinks."
+      </div>
+      <div class="say-this">
+        <div class="say-label">Then probe</div>
+        "The ontology-first approach you're taking is actually the right foundation — you need the semantic framework before agents can reason about the data. The question is: where in your current pipeline does the ontology break down? Is it at entity extraction, at relationship mapping, or at harmonisation across different source formats?"
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 3 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">03</span>
+      Agentic platform architecture — "What does the platform look like?"
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Playtech — the three-layer model</div>
+        <p><strong>Orchestration layer</strong> — how agents are deployed, coordinated, lifecycle managed. <strong>Services layer</strong> — shared capabilities like memory, data access, model routing. <strong>Governance layer</strong> — permissions, logging, cost controls, release management.</p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From News UK — deterministic / probabilistic split</div>
+        <p>Within each layer, split components into <strong>deterministic</strong> (must be bulletproof) and <strong>probabilistic</strong> (accept non-determinism, contain it with validation gates).</p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Playtech — the lifecycle problem</div>
+        <p>"When you've got 50 business units building 10 agents each, all with different life cycles, all needing version control — within 3 months you'll have 5000 agents." Mango won't have 5000, but they'll have multiple agents across harmonisation, annotation, similarity, trials, and multimodal. The lifecycle question matters early.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "The way we think about it — and we've built this for other enterprise clients — is three layers. First, the orchestration layer: how do your agents get deployed, versioned, coordinated? For you that's the harmonisation pipeline, the annotation workflows, the clinical trial processing. Second, the services layer: shared capabilities that every agent needs — access to your patient data, your ontology, your model routing, your cost tracking. Third, the governance layer: who can deploy what, what gets logged, how do you audit what the AI did and why."
+      </div>
+      <div class="say-this">
+        <div class="say-label">Then add the deterministic/probabilistic frame</div>
+        "Within each layer, there's a split between deterministic and probabilistic components. Your data pipeline, your ontology rules, your validation checks — those need to be bulletproof. The LLM calls sit inside the deterministic framework with validation gates around them. So an agent can attempt to harmonise a record, but a validation step checks it against your ontology before it's committed. If confidence is below threshold, it routes to a human annotator."
+      </div>
+      <p>Tie it to Mohit's flywheel: <strong>"This is exactly the flywheel you described — you're not building one application, you're building the platform that makes every subsequent application faster to create, cheaper to run, and safer to operate."</strong></p>
+    </div>
+  </div>
+
+  <!-- SCENARIO 4 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">04</span>
+      Data privacy &amp; regulatory compliance
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Einstein — healthcare data sovereignty</div>
+        <p>"All the data stays in your estate, none of your data ever leaves your estate." Build in-house, integrate into their cloud. Their IP, their source code.</p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Lumanity — enterprise LLM governance</div>
+        <p>30–70 users needed: <strong>RBAC</strong> (role-based access), <strong>environment segmentation</strong> (sandbox/dev/prod), <strong>privacy controls</strong> (prevent accidental upload of sensitive data), <strong>audit trails</strong> (compliance logging of every AI interaction).</p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Playtech — AI security testing</div>
+        <p>Four threat vectors: <strong>prompt injection, data poisoning, hallucination, content safety.</strong> For oncology, all four matter intensely — a hallucinated drug interaction is dangerous.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "With patient data — especially oncology data at this scale — we'd never propose an architecture where data leaves your environment. Everything we build runs in your cloud, your VPC. The models we use for extraction and harmonisation would either be deployed within your infrastructure, or we'd use API calls where only the minimum necessary context is sent — and we'd work with your compliance team to define exactly what that boundary looks like."
+      </div>
+      <div class="say-this">
+        <div class="say-label">On sovereignty</div>
+        "We've worked with healthcare providers where data sovereignty meant certain data couldn't cross borders at all. Our approach: the AI runs where the data lives, not the other way around. If your Indian patient data needs to stay in India, we build the pipeline to run there."
+      </div>
+      <div class="say-this">
+        <div class="say-label">On governance</div>
+        "On the governance side — designed into the platform from day one, not bolted on later — you need RBAC so not every user sees every patient record, environment segmentation so dev work never touches production data, audit trails so you can show a regulator exactly what the AI did with any given record, and safety rails around hallucination and content accuracy."
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 5 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">05</span>
+      "Which LLM models do you use?"
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Suvoda + Lumanity</div>
+        <p>Fine-tuned small models beat general-purpose large models for extraction tasks. Lumanity chose Claude for long-context and citation capabilities. Right model for each task, not one model for everything.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "Model selection is something we'd benchmark early in delivery, not assume upfront. For data harmonisation, we'd likely test: a frontier model like Claude for complex reasoning — understanding clinical context, resolving ambiguous records — a fine-tuned smaller model for high-volume extraction where you need consistency and lower cost, and your existing NLP pipeline for the deterministic parts that already work."
+      </div>
+      <div class="say-this">
+        <div class="say-label">On extraction specifically</div>
+        "One thing we've learned in healthcare: for extraction tasks, a fine-tuned small model often outperforms a general-purpose large model. We had a case where we fine-tuned a model specifically for document extraction and it ended up being more accurate than the humans doing it manually. The key was: we could trace every extracted value back to a citation in the source document, so the reviewer could validate in seconds."
+      </div>
+      <p>For ontology work: <strong>"Mapping messy data to structured cancer ontologies — that's where frontier models earn their keep. They handle the ambiguity, abbreviations, inconsistent terminology across hospitals and countries. But you'd want a smaller, cheaper model for high-volume stuff like dedup and format normalisation."</strong></p>
+    </div>
+  </div>
+
+  <!-- SCENARIO 6 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">06</span>
+      Patient similarity &amp; Gavin's traditional models
+    </button>
+    <div class="tech-body">
+      <p>Gavin has done significant work on patient similarity using traditional ML. He'll be protective of this work. <strong>Frame agents as complementary, not replacement.</strong></p>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "The patient similarity work is really interesting because it's a perfect example of where traditional models and agentic AI complement each other. Your traditional similarity models give you the mathematical rigour for cohort building. What agents can add is the ability to pull in unstructured context — clinical notes, imaging reports, genomic data — that your current models can't easily consume. So the agent enriches the input to your similarity engine rather than replacing it."
+      </div>
+      <div class="say-this">
+        <div class="say-label">Then probe</div>
+        "The question for us would be: what data is your similarity model currently blind to that a clinician would consider relevant? That gap is usually where agents add the most value."
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 7 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">07</span>
+      Clinical trials — CRO partnership
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Suvoda — clinical trial AI</div>
+        <p>99.9% accuracy on known patterns, drops to 41.4% on novel protocols. <strong>Hallucination is the critical risk</strong> in regulated domains. Human-in-the-loop validation is non-negotiable. Fine-tuning helps but doesn't solve truly novel cases.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "We've got several clients in the clinical trial space — the NDAs mean we can't say their name, let alone what we built. But the domain is one we understand deeply. The core challenge is always the same: you need AI that's accurate enough to trust with patient-affecting decisions, but honest enough to flag when it doesn't know. In clinical, a confident wrong answer is worse than no answer at all."
+      </div>
+      <div class="say-this">
+        <div class="say-label">Then probe their trials</div>
+        "For your first two trials — which parts of the workflow are administrative burden versus clinical judgement? Site selection, patient matching, regulatory document processing — those are high-volume, pattern-heavy tasks where agents can accelerate. Protocol design and safety monitoring — those need human judgement with AI support, not AI autonomy."
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 8 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">08</span>
+      Multimodal — genomics, radiology, pathology
+    </button>
+    <div class="tech-body">
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "Multimodal is where things get really interesting and really hard at the same time. Each modality has its own noise characteristics, its own standards — or lack of standards — and its own regulatory requirements."
+      </div>
+      <div class="say-this">
+        <div class="say-label">The sequencing advice</div>
+        "Our view: don't try to build a unified multimodal pipeline from day one. Get the text and structured data harmonisation rock-solid first — that's your foundation. Then add genomic data as a second modality, because it's structured even if complex. Imaging comes last because it requires the most specialised models and the validation is hardest."
+      </div>
+      <p>Tie to platform: <strong>"The flywheel Mohit described — this is exactly how you get there. Build the platform for text harmonisation, prove the pattern works, then the same platform architecture extends to new modalities. Each one is a new application on the same three-layer foundation."</strong></p>
+    </div>
+  </div>
+
+  <!-- SCENARIO 9 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">09</span>
+      "How long / how much?"
+    </button>
+    <div class="tech-body">
+      <p><strong>Don't price anything. This is a discovery call.</strong></p>
+      <div class="say-this">
+        <div class="say-label">If they push</div>
+        "Honestly, it's too early to put numbers on it — we need to understand the roadmap in detail first. What I can tell you is our typical first engagement is 8-12 weeks for a focused proof of value. But the right answer comes out of the alignment document, where we scope it together based on what actually matters most to you."
+      </div>
+      <div class="say-this">
+        <div class="say-label">The risk framing</div>
+        "We do all of discovery at our risk, for free. And when we move to delivery, we don't invoice until the thing is built and it's doing what you expect it to do. All the risk is on our side — we need to earn our stripes."
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 10 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">10</span>
+      Build vs. buy
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Playtech + News UK</div>
+        <p>Principle: <strong>buy infrastructure, build intelligence.</strong> Standard orchestration, compute, storage — but the AI components specific to your domain get built bespoke. "If there's going to be custom code, we're going to own that custom code."</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "For annotation tooling — there are off-the-shelf platforms, but the question is whether they understand oncology data. If your annotation team is correcting AI-harmonised records against cancer-specific ontologies, you probably need something purpose-built. Not from scratch — a custom interface on top of standard components that speaks your domain language."
+      </div>
+      <div class="say-this">
+        <div class="say-label">The principle</div>
+        "Buy your infrastructure — compute, storage, orchestration. Build the intelligence — the harmonisation logic, the ontology mapping, the clinical reasoning that's specific to your data and your domain. That's where the value lives and that's what should be your IP."
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 11 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">11</span>
+      Enablement vs. build — "Can you train our team?"
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Lumanity — the Knowledge FRaiME pivot</div>
+        <p>Original engagement was a product build. It failed an internal gate. Pivot: instead of building one product, Conquer offered <strong>Anthropic stack enablement</strong> — install the LLM infrastructure, set up RBAC and governance, train their team to build on it. More valuable because it gave them capability, not just an application.</p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Playtech — non-technical user adoption</div>
+        <p>Rolled out Cursor to non-technical staff — wildly successful organic adoption. Non-technical teams started having "great ideas for products." Challenge: they then hit DevOps/git/security walls. Enablement needed a governance layer underneath.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "One thing we've seen with companies at your stage — sometimes the most valuable thing isn't building one application, it's building the capability to build many. We've done this with other clients where instead of building a single use case, we installed the AI infrastructure — models, governance, access controls, development patterns — and then enabled their team to build on top of it."
+      </div>
+      <div class="say-this">
+        <div class="say-label">The key question</div>
+        "Does your team want to be building agents themselves in 6 months, or do you want us to keep building them for you? The answer changes the architecture and the engagement model quite a bit."
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 12 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">12</span>
+      AI security, hallucination &amp; trust
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Playtech — the security gauntlet</div>
+        <p>Adam Mitchell deliberately probed: "How do I protect against prompt injection? How do I know data hasn't been poisoned? How do I know my system doesn't hallucinate? How do I know it doesn't give a stupid answer that's going to get me sued?" Four threats: <strong>prompt injection, data poisoning, hallucination, harmful/inaccurate content.</strong></p>
+      </div>
+      <div class="context-block">
+        <div class="ctx-label">From Suvoda — hallucination in clinical</div>
+        <p>Novel test cases: 41.4% accuracy. The remaining 58.6% wasn't all wrong — some was <strong>plausible-sounding but ungrounded.</strong> That's more dangerous than obviously wrong.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "In oncology, AI security isn't a nice-to-have — it's foundational. We think about four threat vectors: prompt injection — can someone embed malicious instructions in the data the agent is processing? Data poisoning — if the training data or reference ontology has errors, the agent inherits them. Hallucination — the agent generates something that looks clinically plausible but isn't grounded in your actual data. And content safety — making sure the output meets clinical and regulatory standards."
+      </div>
+      <div class="say-this">
+        <div class="say-label">Mitigations</div>
+        "For each, the mitigation is different. Prompt injection is an architecture problem — you sanitise inputs. Data poisoning is a data quality problem — your ontology and validation pipeline are the defence. Hallucination is solved through citations — every output should trace back to a source record. And content safety is governance — guardrails around what the agent can and can't output."
+      </div>
+      <p>For oncology specifically: <strong>"If the agent can't cite a specific record or ontology entry for its output, it should flag uncertainty rather than fabricate an answer."</strong></p>
+    </div>
+  </div>
+
+  <!-- SCENARIO 13 -->
+  <div class="tech-scenario">
+    <button class="tech-trigger" onclick="toggleTech(this)">
+      <span class="accordion-arrow">▶</span>
+      <span class="tech-num">13</span>
+      Fragmented data estate — "Data from dozens of hospitals"
+    </button>
+    <div class="tech-body">
+      <div class="context-block">
+        <div class="ctx-label">From Playtech — "50 companies in a trench coat"</div>
+        <p>"We don't have almost any common IT stack across all of these units. 80 development teams — everyone is a completely different git solution, build server, programming language, target audience, technology stack." Solution: <strong>platform above the fragmentation</strong> — central enablement with decentralised execution.</p>
+      </div>
+      <div class="say-this">
+        <div class="say-label">Say this</div>
+        "We've dealt with this exact pattern — a client with 80 different development teams, completely different tech stacks, grown through acquisition. The answer isn't forcing everyone onto one standard. It's building a platform layer that sits above the fragmentation. You define the target data model — your harmonised ontology — and then build adapters for each source format. The platform handles the routing, transformation, and quality checks. Each new data source is a new adapter, not a new architecture."
+      </div>
+      <div class="say-this">
+        <div class="say-label">Apply to Mango</div>
+        "For you, that means: each hospital, each country, each EHR system gets an ingestion adapter. The adapters do the initial normalisation. Then the harmonisation agents work on partially-normalised data against your ontology. The annotation team handles what the agents can't resolve. Same platform, different inputs."
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE TABLE -->
+  <div style="margin-top: 32px;">
+    <div class="section-eyebrow" style="color: var(--brand);">Quick Reference — 16 phrases</div>
+    <table class="tech-ref-table" style="border: 1px solid var(--border); border-radius: 6px; overflow: hidden;">
+      <thead>
+        <tr><th>When they say…</th><th>You say…</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Messy data</td><td>"Is the messiness at the entity level, the relationship level, or the cross-source harmonisation level?"</td></tr>
+        <tr><td>Ontology</td><td>"What's the ontology coverage like? Mapping to SNOMED, ICD, or a custom cancer-specific ontology?"</td></tr>
+        <tr><td>Which models?</td><td>"We'd benchmark early — extraction wants a fine-tuned small model, reasoning wants a frontier model."</td></tr>
+        <tr><td>Failed agentic attempts</td><td>"What specifically failed — accuracy, hallucination, or the agent doing plausible-looking but wrong things?"</td></tr>
+        <tr><td>Platform architecture</td><td>"Three layers: orchestration, services, governance. Deterministic foundations with probabilistic AI inside validation gates."</td></tr>
+        <tr><td>Cost / timeline</td><td>"Too early to scope — but first engagements are typically 8-12 weeks, and we do discovery at our risk."</td></tr>
+        <tr><td>Data privacy</td><td>"Everything runs in your environment. The AI goes to the data, not the other way around."</td></tr>
+        <tr><td>Multimodal</td><td>"Text first, genomics second, imaging last. Each modality is a new app on the same platform."</td></tr>
+        <tr><td>Annotation tooling</td><td>"Standard infrastructure, domain-specific interface. Annotators need confidence scores and source citations."</td></tr>
+        <tr><td>Clinical trials</td><td>"Deep experience under NDA. Key split: admin burden vs clinical judgement — agents accelerate the first, support the second."</td></tr>
+        <tr><td>Accuracy</td><td>"Accuracy degrades with novelty. We've seen 99% on known drop to 40% on novel. Start with known, expand."</td></tr>
+        <tr><td>Hallucination</td><td>"Every output should be citation-backed. If it can't point to a source record, it flags uncertainty, not fabricates."</td></tr>
+        <tr><td>Fragmented sources</td><td>"Don't force convergence. Platform above the fragmentation — target ontology + source adapters + quality gates."</td></tr>
+        <tr><td>Enable our team</td><td>"We can build for you, or build the platform and enable your team. The flywheel answer is usually the second."</td></tr>
+        <tr><td>Security</td><td>"Four threats: prompt injection, data poisoning, hallucination, content safety. Each has a different mitigation."</td></tr>
+        <tr><td>Agent lifecycle</td><td>"Version control, promotion, logging, monitoring — designed in from day one, not bolted on at 50 agents."</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
 <!-- ══ SECTION: RISKS & WATCH POINTS ══ -->
 <div id="risks" class="section alt">
 <div class="content-wrap">
@@ -490,6 +887,14 @@ blockquote cite { display: block; margin-top: 8px; font-size: 12px; font-style: 
 
 <script>
 function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const arrow = btn.querySelector('.accordion-arrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+function toggleTech(btn) {
   const body = btn.nextElementSibling;
   const arrow = btn.querySelector('.accordion-arrow');
   const isOpen = body.classList.contains('open');
